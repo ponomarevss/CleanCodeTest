@@ -3,14 +3,14 @@ package ru.ponomarevss.cleancodetest.presentation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.ponomarevss.cleancodetest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private var vb: ActivityMainBinding? = null
 
-    lateinit var vm: MainViewModel
+    private val vm by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(vb?.root)
 
         Log.e("AAA", "Activity created")
-
-        vm = ViewModelProvider(this, MainViewModelFactory(applicationContext))[MainViewModel::class.java]
 
         val btnSend = vb?.btnSend
         val btnReceive = vb?.btnReceive
